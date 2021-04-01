@@ -13,7 +13,7 @@ const App = () => {
   return (
     <div className='App'>
       <Navbar />
-
+      <AddExpense />
       {/* <Switch>
         <Route exact path='/' component={AddExpense} />
         <Route exact path='/activity' component={Activity} />
