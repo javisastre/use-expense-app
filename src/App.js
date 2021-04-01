@@ -2,7 +2,7 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 import "./App.css";
 
-import Navbar from "./Components/Navbar";
+import Navbar from "./Components/Navbar/Navbar";
 import AddExpense from "./Components/AddExpense";
 import Activity from "./Components/Activity";
 import EditExpense from "./Components/EditExpense";
@@ -14,13 +14,13 @@ const App = () => {
     <div className='App'>
       <Navbar />
 
-      <Switch>
+      {/* <Switch>
         <Route exact path='/' component={AddExpense} />
         <Route exact path='/activity' component={Activity} />
         <Route exact path='/expense' component={EditExpense} />
         <Route exact path='/overview' component={Overview} />
         <Route exact path='/timeline' component={Timeline} />
-      </Switch>
+      </Switch> */}
     </div>
   );
 };
