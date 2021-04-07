@@ -2,12 +2,12 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 import "./App.css";
 
-import Navbar from "./Components/Navbar/Navbar";
-import AddExpense from "./Components/AddExpense";
-import Activity from "./Components/Activity";
-import EditExpense from "./Components/EditExpense";
-import Overview from "./Components/Overview";
-import Timeline from "./Components/Timeline";
+import Navbar from "./components/Navbar/Navbar";
+import AddExpense from "./components/AddExpense";
+import Activity from "./components/Activity";
+import EditExpense from "./components/EditExpense";
+import Overview from "./components/Overview";
+import Timeline from "./components/Timeline";
 
 const App = () => {
   return (
