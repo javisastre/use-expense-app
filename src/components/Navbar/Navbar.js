@@ -2,16 +2,24 @@ import React from "react";
 import { useState, useEffect } from "react";
 
 import Menu from "./Menu";
-import expenseService from "./../../services/expenseServices";
+import expenseService from "../../services/expenseservices";
 
 const Navbar = () => {
   const [display, setDisplay] = useState(false);
-  const [amount, setAmount] = useState(0);
+  const [balance, setBalance] = useState(0);
 
   useEffect(() => {
-    const totalAmount = expenseService.getAllExpenses();
-    console.log(totalAmount);
-    //    setAmount(totalAmount);
+    const getBalance = async () => {
+      try {
+        const newBalance = await expenseService.getTotalBalance();
+        console.log(newBalance);
+        setBalance(newBalance);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getBalance();
   }, []);
 
   const toggleMenu = () => setDisplay(!display);
@@ -29,7 +37,7 @@ const Navbar = () => {
       ) : (
         <div onClick={toggleMenu} className='navbar-top'>
           <p>-</p>
-          <p>Current Month: {amount} €</p>
+          <p>Current Month: {balance} €</p>
         </div>
       )}
     </div>
