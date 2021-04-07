@@ -13,14 +13,13 @@ const App = () => {
   return (
     <div className='App'>
       <Navbar />
-      <AddExpense />
-      {/* <Switch>
+      <Switch>
         <Route exact path='/' component={AddExpense} />
         <Route exact path='/activity' component={Activity} />
         <Route exact path='/expense' component={EditExpense} />
         <Route exact path='/overview' component={Overview} />
         <Route exact path='/timeline' component={Timeline} />
-      </Switch> */}
+      </Switch>
     </div>
   );
 };
