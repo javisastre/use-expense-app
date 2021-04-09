@@ -12,7 +12,6 @@ const Navbar = () => {
     const getBalance = async () => {
       try {
         const newBalance = await expenseService.getTotalBalance();
-        console.log(newBalance);
         setBalance(newBalance);
       } catch (error) {
         console.log(error);

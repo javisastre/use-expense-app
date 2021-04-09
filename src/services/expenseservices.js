@@ -29,9 +29,9 @@ class ExpenseService {
     });
   }
 
-  createExpense(amount, category) {
+  createExpense(amount, category, isIncome) {
     const pr = this.expense
-      .post("/expenses", { amount, category })
+      .post("/expenses", { amount, category, isIncome })
       .then(({ data }) => data);
     return pr;
   }
