@@ -8,7 +8,7 @@ const Menu = (props) => {
         Insert New Expense
       </Link>
       <Link to='/activity' onClick={props.toggle}>
-        See Detailed Activity
+        See Activity
       </Link>
       <Link to='/overview' onClick={props.toggle}>
         See Month Overview

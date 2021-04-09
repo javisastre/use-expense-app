@@ -2,6 +2,7 @@
   background-color: rgb(65, 65, 65);
   color: white;
   height: 7vh;
+  width: 100vw;
 }
 
 .navbar-top {
@@ -27,4 +28,10 @@
   color: white;
   text-decoration: none;
   margin: 10px 0;
+}
+
+article {
+  border: 1px solid rgb(59, 59, 59);
+  margin: 10px;
+  padding: 10px;
 }

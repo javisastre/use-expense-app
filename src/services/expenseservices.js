@@ -9,11 +9,10 @@ class ExpenseService {
   }
 
   getAllExpenses() {
-    const pr = this.expense
+    return this.expense
       .get("/expenses")
       .then(({ data }) => data)
       .catch((error) => console.log(error));
-    return pr;
   }
 
   getTotalBalance() {
@@ -30,10 +29,13 @@ class ExpenseService {
   }
 
   createExpense(amount, category, isIncome) {
-    const pr = this.expense
+    return this.expense
       .post("/expenses", { amount, category, isIncome })
       .then(({ data }) => data);
-    return pr;
+  }
+
+  deleteExpense(id) {
+    return this.expense.delete(`/expenses/${id}`).then(({ data }) => data);
   }
 }
 
