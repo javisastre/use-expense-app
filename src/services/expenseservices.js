@@ -17,18 +17,16 @@ class ExpenseService {
   }
 
   getTotalBalance() {
-    let balance = this.expense.get("/expenses").then(({ data }) => {
+    return this.expense.get("/expenses").then(({ data }) => {
       const newData = [...data];
 
-      balance = newData.reduce((acc, element) => {
-        const newAcc = acc + element.amount;
+      return newData.reduce((acc, element) => {
+        const newAcc = element.isIncome
+          ? acc + element.amount
+          : acc - element.amount;
         return newAcc;
       }, 0);
-
-      return balance;
     });
-    // FIX THIS BALANCE CALCULATION
-    return balance;
   }
 
   createExpense(amount, category) {
