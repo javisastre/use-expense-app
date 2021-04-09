@@ -28,10 +28,24 @@ class ExpenseService {
     });
   }
 
+  getExpense(id) {
+    return this.expense
+      .get(`/expenses/${id}`)
+      .then(({ data }) => data)
+      .catch((error) => console.log(error));
+  }
+
   createExpense(amount, category, isIncome) {
     return this.expense
       .post("/expenses", { amount, category, isIncome })
       .then(({ data }) => data);
+  }
+
+  updateExpense(id, amount, category, isIncome) {
+    return this.expense
+      .put(`/expenses/${id}`, { amount, category, isIncome })
+      .then(({ data }) => data)
+      .catch((error) => console.log(error));
   }
 
   deleteExpense(id) {

@@ -1,22 +1,26 @@
 import React from "react";
 import { useState } from "react";
-import expenseservices from "./../services/expenseservices";
+import expenseService from "./../services/expenseservices";
 
 const AddExpense = () => {
   const [amount, setAmount] = useState(0);
   const [category, setCategory] = useState("");
 
   const handleInput = (event) => {
-    const value = event.target.value;
+    const value = event.target.validity.valid ? event.target.value : amount;
     setAmount(value);
   };
 
+  const handleCategory = (event) => {
+    setCategory(event.target.value);
+  };
+  
   const formSubmit = async (event) => {
     event.preventDefault();
     const isIncome = category === "Salary" ? true : false;
 
     try {
-      await expenseservices.createExpense(amount, category, isIncome);
+      await expenseService.createExpense(amount, category, isIncome);
     } catch (error) {
       console.log(error);
     }
@@ -24,9 +28,6 @@ const AddExpense = () => {
     setCategory("");
   };
 
-  const handleCategory = (event) => {
-    setCategory(event.target.value);
-  };
 
   return (
     <div>
