@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import expenseService from "../services/expenseservices";
 
-const EditExpense = (props) => {
+const EditExpense = () => {
   const expenseId = useParams().id;
   const [amount, setAmount] = useState(0);
   const [category, setCategory] = useState("");
+
+  const history = useHistory();
 
   const getExpenseData = async () => {
     try {
@@ -38,7 +40,7 @@ const EditExpense = (props) => {
     } catch (error) {
       console.log(error);
     }
-    props.history.push("/activity");
+    history.push("/activity");
   };
 
   return (

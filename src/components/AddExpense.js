@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import expenseService from "./../services/expenseservices";
 
-const AddExpense = () => {
+const AddExpense = ({ updateBalance }) => {
   const [amount, setAmount] = useState(0);
   const [category, setCategory] = useState("");
 
@@ -14,7 +14,9 @@ const AddExpense = () => {
   const handleCategory = (event) => {
     setCategory(event.target.value);
   };
-  
+
+  const handleFocus = (event) => event.target.select();
+
   const formSubmit = async (event) => {
     event.preventDefault();
     const isIncome = category === "Salary" ? true : false;
@@ -26,13 +28,19 @@ const AddExpense = () => {
     }
     setAmount(0);
     setCategory("");
+    updateBalance();
   };
-
 
   return (
     <div>
       <form onSubmit={formSubmit}>
-        <input type='number' min='0' value={amount} onInput={handleInput} />
+        <input
+          type='number'
+          min='0'
+          value={amount}
+          onInput={handleInput}
+          onClick={handleFocus}
+        />
         <p>Expense category:</p>
         <input
           type='radio'
