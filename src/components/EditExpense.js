@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import expenseService from "../services/expenseservices";
 
-const EditExpense = () => {
+const EditExpense = ({ update, setUpdate }) => {
   const expenseId = useParams().id;
   const [amount, setAmount] = useState(0);
   const [category, setCategory] = useState("");
@@ -41,6 +41,7 @@ const EditExpense = () => {
     } catch (error) {
       console.log(error);
     }
+    setUpdate(!update);
     history.push("/activity");
   };
 

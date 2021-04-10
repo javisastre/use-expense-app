@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import expenseService from "./../services/expenseservices";
 
-const AddExpense = (props) => {
+const AddExpense = ({ update, setUpdate }) => {
   const [amount, setAmount] = useState(0);
   const [category, setCategory] = useState("");
 
@@ -28,8 +28,7 @@ const AddExpense = (props) => {
     }
     setAmount(0);
     setCategory("");
-    console.log(props);
-    props.updateFunction();
+    setUpdate(!update);
   };
 
   return (

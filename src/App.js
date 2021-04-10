@@ -28,23 +28,18 @@ const App = () => {
     getBalance();
   }, [update]);
 
-  const updateBalance = () => {
-    console.log("hola");
-    setUpdate(!update);
-  };
-
   return (
     <div className='App'>
       <Navbar parentBalance={balance} />
+
       <Switch>
-        <Route
-          exact
-          path='/'
-          updateFunction={updateBalance}
-          component={AddExpense}
-        />
-        <Route exact path='/activity' component={Activity} />
-        <Route exact path='/expense/:id' component={EditExpense} />
+        <Route exact path='/' component={Activity} />
+        <Route exact path='/addexpense'>
+          <AddExpense update={update} setUpdate={setUpdate} />
+        </Route>
+        <Route exact path='/expense/:id'>
+          <EditExpense update={update} setUpdate={setUpdate} />
+        </Route>
         <Route exact path='/overview' component={Overview} />
         <Route exact path='/timeline' component={Timeline} />
       </Switch>

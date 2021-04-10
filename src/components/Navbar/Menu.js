@@ -1,19 +1,39 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Menu = (props) => {
+const Menu = ({ display, setDisplay }) => {
   return (
     <div className='menu'>
-      <Link to='/' onClick={props.toggle}>
-        Insert New Expense
-      </Link>
-      <Link to='/activity' onClick={props.toggle}>
+      <Link
+        to='/'
+        onClick={() => {
+          setDisplay(!display);
+        }}
+      >
         See Activity
       </Link>
-      <Link to='/overview' onClick={props.toggle}>
+      <Link
+        to='/addexpense'
+        onClick={() => {
+          setDisplay(!display);
+        }}
+      >
+        Insert New Expense
+      </Link>
+      <Link
+        to='/overview'
+        onClick={() => {
+          setDisplay(!display);
+        }}
+      >
         See Month Overview
       </Link>
-      <Link to='/timeline' onClick={props.toggle}>
+      <Link
+        to='/timeline'
+        onClick={() => {
+          setDisplay(!display);
+        }}
+      >
         See Timeline
       </Link>
     </div>

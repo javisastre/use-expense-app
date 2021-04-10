@@ -1,26 +1,36 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 import Menu from "./Menu";
 
 const Navbar = ({ parentBalance }) => {
   const [display, setDisplay] = useState(false);
 
-  const toggleMenu = () => setDisplay(!display);
-
   return (
     <div className='navbar'>
       {display ? (
         <div>
           <div className='navbar-top'>
-            <p onClick={toggleMenu}>X</p>
+            <p
+              onClick={() => {
+                setDisplay(!display);
+              }}
+            >
+              X
+            </p>
             <p>Current Month: {parentBalance} €</p>
           </div>
-          <Menu toggle={toggleMenu} />
+          <Menu setDisplay={setDisplay} display={display} />
         </div>
       ) : (
         <div className='navbar-top'>
-          <p onClick={toggleMenu}>-</p>
+          <p
+            onClick={() => {
+              setDisplay(!display);
+            }}
+          >
+            -
+          </p>
           <p>Current Month: {parentBalance} €</p>
         </div>
       )}
