@@ -9,18 +9,19 @@ const EditExpense = () => {
 
   const history = useHistory();
 
-  const getExpenseData = async () => {
-    try {
-      const expenseData = await expenseService.getExpense(expenseId);
+  useEffect(() => {
+    const getExpenseData = async () => {
+      try {
+        const expenseData = await expenseService.getExpense(expenseId);
 
-      setAmount(expenseData.amount);
-      setCategory(expenseData.category);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(getExpenseData, []);
+        setAmount(expenseData.amount);
+        setCategory(expenseData.category);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getExpenseData();
+  }, []);
 
   const handleInput = (event) => {
     const value = event.target.validity.valid ? event.target.value : amount;

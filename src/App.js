@@ -40,7 +40,7 @@ const App = () => {
         <Route
           exact
           path='/'
-          updateBalance={updateBalance}
+          updateFunction={updateBalance}
           component={AddExpense}
         />
         <Route exact path='/activity' component={Activity} />
