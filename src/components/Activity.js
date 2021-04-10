@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import expenseService from "../services/expenseservices";
 
-const Activity = () => {
+const Activity = ({ update, setUpdate }) => {
   const [activities, setActivities] = useState([]);
 
   const getAllActivities = async () => {
@@ -22,6 +22,7 @@ const Activity = () => {
     } catch (error) {
       console.log(error);
     }
+    setUpdate(!update);
     getAllActivities();
   };
 

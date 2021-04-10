@@ -33,7 +33,9 @@ const App = () => {
       <Navbar parentBalance={balance} />
 
       <Switch>
-        <Route exact path='/' component={Activity} />
+        <Route exact path='/'>
+          <Activity update={update} setUpdate={setUpdate} />
+        </Route>
         <Route exact path='/addexpense'>
           <AddExpense update={update} setUpdate={setUpdate} />
         </Route>
