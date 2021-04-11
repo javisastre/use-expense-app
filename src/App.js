@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
-import "./App.css";
 
 import Navbar from "./components/Navbar/Navbar";
 import AddExpense from "./components/AddExpense";

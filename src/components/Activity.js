@@ -3,6 +3,18 @@ import { Link } from "react-router-dom";
 import expenseService from "../services/expenseservices";
 import Moment from "react-moment";
 
+import { makeStyles } from "@material-ui/core/styles";
+import Fab from "@material-ui/core/Fab";
+import AddIcon from "@material-ui/icons/Add";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    "& > *": {
+      margin: theme.spacing(1),
+    },
+  },
+}));
+
 const Activity = ({ update, setUpdate }) => {
   const [activities, setActivities] = useState([]);
 
@@ -43,7 +55,9 @@ const Activity = ({ update, setUpdate }) => {
         );
       })}
       <Link to='/addexpense'>
-        <p>+</p>
+        <Fab size='medium' color='primary' aria-label='add'>
+          <AddIcon />
+        </Fab>
       </Link>
     </div>
   );
