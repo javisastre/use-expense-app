@@ -1,8 +1,16 @@
 # useExpense app
 
 A simple app to keep track of your personal expenses.
+
 Developed using:
-- Hooks on the React framework (Frontend)
+- React Hooks framework (Frontend)
 - NodeJS (Backend)
-- Material UI library
-- Netlify for deployment
+- Mongoose (Model)
+- MongoDB Atlas (DataBase)
+- Material UI library (CSS)
+- Netlify (deployment)
+
+Components:
+- Activity: all the expenses added (amount, category and time & date). Edit or remove any of them.
+- AddExpense: add a new expense (amount and category)
+- Overview: montlhy overview.
