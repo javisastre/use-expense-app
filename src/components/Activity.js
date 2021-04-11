@@ -40,6 +40,9 @@ const Activity = ({ update, setUpdate }) => {
           </article>
         );
       })}
+      <Link to='/addexpense'>
+        <p>+</p>
+      </Link>
     </div>
   );
 };
