@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import expenseService from "../services/expenseservices";
+import Moment from "react-moment";
 
 const Activity = ({ update, setUpdate }) => {
   const [activities, setActivities] = useState([]);
@@ -33,6 +34,7 @@ const Activity = ({ update, setUpdate }) => {
           <article key={act._id}>
             <p>{act.amount}</p>
             <p>{act.category}</p>
+            <Moment format='DD/MM/YYYY @ hh:mm'>{act.created_at}</Moment>
             <Link to={`/expense/${act._id}`}>
               <button>Edit</button>
             </Link>
