@@ -11,7 +11,6 @@ import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import Button from "@material-ui/core/Button";
-import { green } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -87,22 +86,15 @@ const AddExpense = ({ update, setUpdate }) => {
   const [open, setOpen] = React.useState(false);
 
   const history = useHistory();
-
   const classes = useStyles();
 
+  const handleCategory = (event) => setCategory(event.target.value);
+  const handleFocus = (event) => event.target.select();
+  const handleClose = () => setOpen(false);
+  const handleOpen = () => setOpen(true);
   const handleInput = (event) => {
     const value = event.target.validity.valid ? event.target.value : amount;
     setAmount(value);
-  };
-  const handleCategory = (event) => setCategory(event.target.value);
-  const handleFocus = (event) => event.target.select();
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const handleOpen = () => {
-    setOpen(true);
   };
 
   const formSubmit = async (event) => {
@@ -114,8 +106,6 @@ const AddExpense = ({ update, setUpdate }) => {
     } catch (error) {
       console.log(error);
     }
-    setAmount(0);
-    setCategory("");
     setUpdate(!update);
     history.push("/");
   };
