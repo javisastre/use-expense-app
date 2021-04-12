@@ -6,6 +6,7 @@ import Moment from "react-moment";
 import { makeStyles } from "@material-ui/core/styles";
 import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
+import { green } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -13,9 +14,21 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(1),
     },
   },
+  fabGreen: {
+    color: theme.palette.common.white,
+    backgroundColor: green[700],
+  },
+  fabPosition: {
+    position: "fixed",
+    zIndex: 1,
+    right: "10vw",
+    bottom: "10vw",
+  },
 }));
 
 const Activity = ({ update, setUpdate }) => {
+  const classes = useStyles();
+
   const [activities, setActivities] = useState([]);
 
   const getAllActivities = async () => {
@@ -54,8 +67,13 @@ const Activity = ({ update, setUpdate }) => {
           </article>
         );
       })}
-      <Link to='/addexpense'>
-        <Fab size='medium' color='primary' aria-label='add'>
+      <Link to='/addexpense' className={classes.fabPosition}>
+        <Fab
+          size='medium'
+          color='primary'
+          aria-label='add'
+          className={classes.fabGreen}
+        >
           <AddIcon />
         </Fab>
       </Link>

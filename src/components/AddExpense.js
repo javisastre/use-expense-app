@@ -1,9 +1,12 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import expenseService from "./../services/expenseservices";
 
 const AddExpense = ({ update, setUpdate }) => {
   const [amount, setAmount] = useState(0);
   const [category, setCategory] = useState("");
+
+  const history = useHistory();
 
   const handleInput = (event) => {
     const value = event.target.validity.valid ? event.target.value : amount;
@@ -28,6 +31,7 @@ const AddExpense = ({ update, setUpdate }) => {
     setAmount(0);
     setCategory("");
     setUpdate(!update);
+    history.push("/");
   };
 
   return (

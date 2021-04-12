@@ -7,6 +7,7 @@ import Activity from "./components/Activity";
 import EditExpense from "./components/EditExpense";
 import Overview from "./components/Overview";
 import Timeline from "./components/Timeline";
+import NewNav from "./components/Navbar/NewNav";
 
 import expenseService from "./services/expenseservices";
 
@@ -29,7 +30,7 @@ const App = () => {
 
   return (
     <div className='App'>
-      <Navbar parentBalance={balance} />
+      <NewNav parentBalance={balance} />
 
       <Switch>
         <Route exact path='/'>
