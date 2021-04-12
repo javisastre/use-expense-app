@@ -10,11 +10,10 @@ import Menu from "@material-ui/core/Menu";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    position: "sticky",
     top: 0,
     left: 0,
-    position: "fixed",
     zIndex: 1,
-    width: "100vw",
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -33,7 +32,6 @@ const navLinks = [
 
 export default function MenuAppBar({ parentBalance }) {
   const classes = useStyles();
-  const [display, setDisplay] = useState(false);
 
   return (
     <div className={classes.root}>
@@ -44,9 +42,6 @@ export default function MenuAppBar({ parentBalance }) {
             className={classes.menuButton}
             color='inherit'
             aria-label='menu'
-            onClick={() => {
-              setDisplay(!display);
-            }}
           >
             <Hidden mdUp>
               <Drawer navLinks={navLinks} />
@@ -57,7 +52,6 @@ export default function MenuAppBar({ parentBalance }) {
           </Typography>
         </Toolbar>
       </AppBar>
-      {display ? <Menu setDisplay={setDisplay} display={display} /> : null}
     </div>
   );
 }

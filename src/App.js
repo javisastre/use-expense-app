@@ -31,21 +31,19 @@ const App = () => {
     <div className='App'>
       <NavBar parentBalance={balance} />
 
-      <div style={{ marginTop: 87 }}>
-        <Switch>
-          <Route exact path='/'>
-            <Activity update={update} setUpdate={setUpdate} />
-          </Route>
-          <Route exact path='/addexpense'>
-            <AddExpense update={update} setUpdate={setUpdate} />
-          </Route>
-          <Route exact path='/expense/:id'>
-            <EditExpense update={update} setUpdate={setUpdate} />
-          </Route>
-          <Route exact path='/overview' component={Overview} />
-          <Route exact path='/timeline' component={Timeline} />
-        </Switch>
-      </div>
+      <Switch>
+        <Route exact path='/'>
+          <Activity update={update} setUpdate={setUpdate} />
+        </Route>
+        <Route exact path='/addexpense'>
+          <AddExpense update={update} setUpdate={setUpdate} />
+        </Route>
+        <Route exact path='/expense/:id'>
+          <EditExpense update={update} setUpdate={setUpdate} />
+        </Route>
+        <Route exact path='/overview' component={Overview} />
+        <Route exact path='/timeline' component={Timeline} />
+      </Switch>
     </div>
   );
 };
