@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
 
-import Navbar from "./components/Navbar/Navbar";
 import AddExpense from "./components/AddExpense";
 import Activity from "./components/Activity";
 import EditExpense from "./components/EditExpense";
 import Overview from "./components/Overview";
 import Timeline from "./components/Timeline";
-import NewNav from "./components/Navbar/NewNav";
+import NavBar from "./components/Navbar/NavBar";
 
 import expenseService from "./services/expenseservices";
 
@@ -30,21 +29,23 @@ const App = () => {
 
   return (
     <div className='App'>
-      <NewNav parentBalance={balance} />
+      <NavBar parentBalance={balance} />
 
-      <Switch>
-        <Route exact path='/'>
-          <Activity update={update} setUpdate={setUpdate} />
-        </Route>
-        <Route exact path='/addexpense'>
-          <AddExpense update={update} setUpdate={setUpdate} />
-        </Route>
-        <Route exact path='/expense/:id'>
-          <EditExpense update={update} setUpdate={setUpdate} />
-        </Route>
-        <Route exact path='/overview' component={Overview} />
-        <Route exact path='/timeline' component={Timeline} />
-      </Switch>
+      <div style={{ marginTop: 87 }}>
+        <Switch>
+          <Route exact path='/'>
+            <Activity update={update} setUpdate={setUpdate} />
+          </Route>
+          <Route exact path='/addexpense'>
+            <AddExpense update={update} setUpdate={setUpdate} />
+          </Route>
+          <Route exact path='/expense/:id'>
+            <EditExpense update={update} setUpdate={setUpdate} />
+          </Route>
+          <Route exact path='/overview' component={Overview} />
+          <Route exact path='/timeline' component={Timeline} />
+        </Switch>
+      </div>
     </div>
   );
 };
