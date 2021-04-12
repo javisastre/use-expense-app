@@ -6,13 +6,21 @@ import Moment from "react-moment";
 import { makeStyles } from "@material-ui/core/styles";
 import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
-import { green } from "@material-ui/core/colors";
+import Card from "@material-ui/core/Card";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     "& > *": {
       margin: theme.spacing(1),
     },
+    marginBottom: "15px",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   fabGreen: {
     color: "#ffffff",
@@ -26,6 +34,42 @@ const useStyles = makeStyles((theme) => ({
     zIndex: 1,
     right: "10vw",
     bottom: "10vw",
+  },
+  title: {
+    fontSize: 14,
+  },
+  expense: {
+    color: "#ff0000",
+  },
+  cardMargin: {
+    marginBottom: "5px",
+  },
+  cardAction: {
+    display: "flex",
+    flexDirection: "column",
+  },
+  bar: {
+    backgroundColor: "#0066DD",
+    color: "white",
+  },
+  restaurant: {
+    backgroundColor: "#01AC83",
+    color: "white",
+  },
+  grocery: {
+    backgroundColor: "#DF0086",
+    color: "white",
+  },
+  transport: {
+    backgroundColor: "#E7A600",
+    color: "white",
+  },
+  salary: {
+    backgroundColor: "#14B0F3",
+    color: "white",
+    paddingLeft: "5px",
+    paddingRight: "5px",
+    borderRadius: "2px",
   },
 }));
 
@@ -59,7 +103,33 @@ const Activity = ({ update, setUpdate }) => {
     <div>
       {activities.map((act) => {
         return (
-          <article key={act._id}>
+          <Card className={classes.root}>
+            <CardContent>
+              {act.category === "Salary" ? (
+                <Typography variant='h5' component='h2'>
+                  {act.amount} €{" "}
+                </Typography>
+              ) : (
+                <Typography
+                  variant='h5'
+                  component='h2'
+                  className={classes.expense}
+                >
+                  - {act.amount} €{" "}
+                </Typography>
+              )}
+              <Typography className={classes.salary}>{act.category}</Typography>
+            </CardContent>
+            <CardActions className={classes.cardAction}>
+              <Link to={`/expense/${act._id}`}>
+                <Button size='small'>Edit</Button>
+              </Link>
+              <Button size='small' onClick={() => handleDelete(act._id)}>
+                Delete
+              </Button>
+            </CardActions>
+          </Card>
+          /* <article key={act._id}>
             <p>{act.amount}</p>
             <p>{act.category}</p>
             <Moment format='DD/MM/YYYY @ hh:mm'>{act.created_at}</Moment>
@@ -67,7 +137,7 @@ const Activity = ({ update, setUpdate }) => {
               <button>Edit</button>
             </Link>
             <button onClick={() => handleDelete(act._id)}>Delete</button>
-          </article>
+          </article> */
         );
       })}
       <Link to='/addexpense' className={classes.fabPosition}>
