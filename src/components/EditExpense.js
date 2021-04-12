@@ -127,51 +127,60 @@ const EditExpense = ({ update, setUpdate }) => {
 
   return (
     <div>
-      <form onSubmit={formSubmit}>
-        <input type='number' min='0' value={amount} onInput={handleInput} />
-        <p>Expense category:</p>
-        <input
-          type='radio'
-          checked={category === "Bar/Cafeteria"}
-          value='Bar/Cafeteria'
-          name='expense'
-          onChange={handleCategory}
-        />{" "}
-        Bar/Cafeteria
-        <input
-          type='radio'
-          checked={category === "Restaurant"}
-          value='Restaurant'
-          name='expense'
-          onChange={handleCategory}
-        />{" "}
-        Restaurant
-        <input
-          type='radio'
-          checked={category === "Grocery Store"}
-          value='Grocery Store'
-          name='expense'
-          onChange={handleCategory}
-        />{" "}
-        Grocery Store
-        <input
-          type='radio'
-          checked={category === "Transport"}
-          value='Transport'
-          name='expense'
-          onChange={handleCategory}
-        />{" "}
-        Transport
-        <p>Income category:</p>
-        <input
-          type='radio'
-          checked={category === "Salary"}
-          value='Salary'
-          name='expense'
-          onChange={handleCategory}
-        />{" "}
-        Salary
-        <button>Submit</button>
+      <form onSubmit={formSubmit} className={classes.centerAll}>
+        <FormControl fullWidth className={classes.textArea} variant='outlined'>
+          <InputLabel htmlFor='outlined-adornment-amount'>Amount</InputLabel>
+          <OutlinedInput
+            id='outlined-adornment-amount'
+            value={amount}
+            onChange={handleInput}
+            onClick={handleFocus}
+            endAdornment={<InputAdornment position='end'>€</InputAdornment>}
+            labelWidth={60}
+            type='number'
+          />
+        </FormControl>
+        <FormControl className={classes.categorySelector}>
+          <InputLabel id='select-label'>Category</InputLabel>
+          <Select
+            labelId='select-label'
+            id='select'
+            open={open}
+            onClose={handleClose}
+            onOpen={handleOpen}
+            value={category}
+            onChange={handleCategory}
+          >
+            <ListSubheader>
+              <em>Expenses</em>
+            </ListSubheader>
+            <MenuItem value={"Bar/Cafeteria"} className={classes.bar}>
+              Bar/Cafeteria
+            </MenuItem>
+            <MenuItem value={"Restaurant"} className={classes.restaurant}>
+              Restaurant
+            </MenuItem>
+            <MenuItem value={"Grocery Store"} className={classes.grocery}>
+              Grocery Store
+            </MenuItem>
+            <MenuItem value={"Transport"} className={classes.transport}>
+              Transport
+            </MenuItem>
+            <ListSubheader>
+              <em>Income</em>
+            </ListSubheader>
+            <MenuItem value={"Salary"} className={classes.salary}>
+              Salary
+            </MenuItem>
+          </Select>
+        </FormControl>
+        <Button
+          variant='contained'
+          type='submit'
+          className={classes.submitButton}
+        >
+          Edit Activity
+        </Button>
       </form>
     </div>
   );
