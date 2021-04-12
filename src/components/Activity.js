@@ -15,8 +15,11 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   fabGreen: {
-    color: theme.palette.common.white,
-    backgroundColor: green[700],
+    color: "#ffffff",
+    backgroundColor: "#008D39",
+    "&:hover": {
+      backgroundColor: "#007e33",
+    },
   },
   fabPosition: {
     position: "fixed",

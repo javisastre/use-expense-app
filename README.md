@@ -8,7 +8,7 @@ Developed using:
 - NodeJS (Backend)
 - Mongoose (Model)
 - MongoDB Atlas (DataBase)
-- Material UI library (CSS)
+- Material UI library (Components & CSS)
 - React-Vis (chart visualization)
 - Netlify (deployment)
 
