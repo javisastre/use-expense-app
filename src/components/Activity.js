@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
   fabPosition: {
     position: "fixed",
     zIndex: 1,
-    right: "10vw",
+    right: "43vw",
     bottom: "10vw",
   },
   title: {
@@ -51,22 +51,39 @@ const useStyles = makeStyles((theme) => ({
   bar: {
     backgroundColor: "#0066DD",
     color: "white",
+    width: "98px",
+    paddingLeft: "5px",
+    paddingRight: "5px",
+    borderRadius: "2px",
   },
   restaurant: {
     backgroundColor: "#01AC83",
     color: "white",
+    width: "79px",
+    paddingLeft: "5px",
+    paddingRight: "5px",
+    borderRadius: "2px",
   },
   grocery: {
     backgroundColor: "#DF0086",
     color: "white",
+    width: "101px",
+    paddingLeft: "5px",
+    paddingRight: "5px",
+    borderRadius: "2px",
   },
   transport: {
     backgroundColor: "#E7A600",
     color: "white",
+    width: "72px",
+    paddingLeft: "5px",
+    paddingRight: "5px",
+    borderRadius: "2px",
   },
   salary: {
     backgroundColor: "#14B0F3",
     color: "white",
+    width: "45px",
     paddingLeft: "5px",
     paddingRight: "5px",
     borderRadius: "2px",
@@ -99,26 +116,37 @@ const Activity = ({ update, setUpdate }) => {
     getAllActivities();
   };
 
+  const categorySelector = (cat) => {
+    switch (cat) {
+      case "Salary":
+        return classes.salary;
+      case "Bar/Cafeteria":
+        return classes.bar;
+      case "Grocery Store":
+        return classes.grocery;
+      case "Restaurant":
+        return classes.restaurant;
+      case "Transport":
+        return classes.transport;
+    }
+  };
+
   return (
     <div>
       {activities.map((act) => {
         return (
-          <Card className={classes.root}>
+          <Card className={classes.root} key={act._id}>
             <CardContent>
               {act.category === "Salary" ? (
-                <Typography variant='h5' component='h2'>
-                  {act.amount} €{" "}
-                </Typography>
+                <Typography variant='h5'>{act.amount} € </Typography>
               ) : (
-                <Typography
-                  variant='h5'
-                  component='h2'
-                  className={classes.expense}
-                >
+                <Typography variant='h5' className={classes.expense}>
                   - {act.amount} €{" "}
                 </Typography>
               )}
-              <Typography className={classes.salary}>{act.category}</Typography>
+              <Typography className={categorySelector(act.category)}>
+                {act.category}
+              </Typography>
             </CardContent>
             <CardActions className={classes.cardAction}>
               <Link to={`/expense/${act._id}`}>
@@ -129,15 +157,6 @@ const Activity = ({ update, setUpdate }) => {
               </Button>
             </CardActions>
           </Card>
-          /* <article key={act._id}>
-            <p>{act.amount}</p>
-            <p>{act.category}</p>
-            <Moment format='DD/MM/YYYY @ hh:mm'>{act.created_at}</Moment>
-            <Link to={`/expense/${act._id}`}>
-              <button>Edit</button>
-            </Link>
-            <button onClick={() => handleDelete(act._id)}>Delete</button>
-          </article> */
         );
       })}
       <Link to='/addexpense' className={classes.fabPosition}>
