@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import expenseService from "../services/expenseservices";
-import Moment from "react-moment";
+import DayJS from "react-dayjs";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Fab from "@material-ui/core/Fab";
@@ -152,7 +152,7 @@ const Activity = ({ update, setUpdate }) => {
                 {act.category}
               </Typography>
               <Typography variant='overline' display='block'>
-                <Moment format='DD/MM/YYYY @ hh:mm'>{act.created_at}</Moment>
+                <DayJS format='DD/MM/YYYY @ hh:mm'>{act.created_at}</DayJS>
               </Typography>
             </CardContent>
             <CardActions className={classes.cardAction}>
