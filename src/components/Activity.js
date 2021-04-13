@@ -94,17 +94,19 @@ const Activity = ({ update, setUpdate }) => {
   const classes = useStyles();
 
   const [activities, setActivities] = useState([]);
+  const [activityUpdate, setActivityUpdate] = useState(false);
 
-  const getAllActivities = async () => {
-    try {
-      const allActivities = await expenseService.getAllExpenses();
-      setActivities(allActivities);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(getAllActivities, []);
+  useEffect(() => {
+    const getAllActivities = async () => {
+      try {
+        const allActivities = await expenseService.getAllExpenses();
+        setActivities(allActivities);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getAllActivities();
+  }, [activityUpdate]);
 
   const handleDelete = async (id) => {
     try {
@@ -113,7 +115,7 @@ const Activity = ({ update, setUpdate }) => {
       console.log(error);
     }
     setUpdate(!update);
-    getAllActivities();
+    setActivityUpdate(!activityUpdate);
   };
 
   const categorySelector = (cat) => {
@@ -128,6 +130,8 @@ const Activity = ({ update, setUpdate }) => {
         return classes.restaurant;
       case "Transport":
         return classes.transport;
+      default:
+        return classes.root;
     }
   };
 
@@ -146,6 +150,9 @@ const Activity = ({ update, setUpdate }) => {
               )}
               <Typography className={categorySelector(act.category)}>
                 {act.category}
+              </Typography>
+              <Typography variant='overline' display='block'>
+                <Moment format='DD/MM/YYYY @ hh:mm'>{act.created_at}</Moment>
               </Typography>
             </CardContent>
             <CardActions className={classes.cardAction}>
