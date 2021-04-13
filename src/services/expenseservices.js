@@ -15,22 +15,6 @@ class ExpenseService {
       .catch((error) => console.log(error));
   }
 
-  getTotalBalance() {
-    return this.expense
-      .get("/expenses")
-      .then(({ data }) => {
-        const newData = [...data];
-
-        return newData.reduce((acc, element) => {
-          const newAcc = element.isIncome
-            ? acc + element.amount
-            : acc - element.amount;
-          return newAcc;
-        }, 0);
-      })
-      .catch((error) => console.log(error));
-  }
-
   getExpense(id) {
     return this.expense
       .get(`/expenses/${id}`)

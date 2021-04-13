@@ -12,19 +12,27 @@ import expenseService from "./services/expenseservices";
 
 const App = () => {
   const [balance, setBalance] = useState(0);
+  const [activities, setActivities] = useState([]);
   const [update, setUpdate] = useState(false);
 
   useEffect(() => {
-    const getBalance = async () => {
+    const getAllActivities = async () => {
       try {
-        const newBalance = await expenseService.getTotalBalance();
+        const allActivities = await expenseService.getAllExpenses();
+        setActivities(allActivities);
+
+        const newBalance = allActivities.reduce((acc, element) => {
+          const newAcc = element.isIncome
+            ? acc + element.amount
+            : acc - element.amount;
+          return newAcc;
+        }, 0);
         setBalance(newBalance);
       } catch (error) {
         console.log(error);
       }
     };
-
-    getBalance();
+    getAllActivities();
   }, [update]);
 
   return (
@@ -33,7 +41,11 @@ const App = () => {
 
       <Switch>
         <Route exact path='/'>
-          <Activity update={update} setUpdate={setUpdate} />
+          <Activity
+            update={update}
+            setUpdate={setUpdate}
+            activities={activities}
+          />
         </Route>
         <Route exact path='/addexpense'>
           <AddExpense update={update} setUpdate={setUpdate} />
@@ -41,8 +53,12 @@ const App = () => {
         <Route exact path='/expense/:id'>
           <EditExpense update={update} setUpdate={setUpdate} />
         </Route>
-        <Route exact path='/overview' component={Overview} />
-        <Route exact path='/timeline' component={Timeline} />
+        <Route exact path='/overview'>
+          <Overview activities={activities} />
+        </Route>
+        <Route exact path='/timeline'>
+          <Overview activities={activities} />
+        </Route>
       </Switch>
     </div>
   );

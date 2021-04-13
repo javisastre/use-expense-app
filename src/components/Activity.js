@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import expenseService from "../services/expenseservices";
 import DayJS from "react-dayjs";
@@ -90,23 +90,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Activity = ({ update, setUpdate }) => {
+const Activity = ({ update, setUpdate, activities }) => {
   const classes = useStyles();
-
-  const [activities, setActivities] = useState([]);
-  const [activityUpdate, setActivityUpdate] = useState(false);
-
-  useEffect(() => {
-    const getAllActivities = async () => {
-      try {
-        const allActivities = await expenseService.getAllExpenses();
-        setActivities(allActivities);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getAllActivities();
-  }, [activityUpdate]);
 
   const handleDelete = async (id) => {
     try {
@@ -115,7 +100,6 @@ const Activity = ({ update, setUpdate }) => {
       console.log(error);
     }
     setUpdate(!update);
-    setActivityUpdate(!activityUpdate);
   };
 
   const categorySelector = (cat) => {
