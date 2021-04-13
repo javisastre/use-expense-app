@@ -101,7 +101,7 @@ const EditExpense = ({ update, setUpdate }) => {
       }
     };
     getExpenseData();
-  }, []);
+  }, [expenseId]);
 
   const handleCategory = (event) => setCategory(event.target.value);
   const handleFocus = (event) => event.target.select();
