@@ -16,16 +16,19 @@ class ExpenseService {
   }
 
   getTotalBalance() {
-    return this.expense.get("/expenses").then(({ data }) => {
-      const newData = [...data];
+    return this.expense
+      .get("/expenses")
+      .then(({ data }) => {
+        const newData = [...data];
 
-      return newData.reduce((acc, element) => {
-        const newAcc = element.isIncome
-          ? acc + element.amount
-          : acc - element.amount;
-        return newAcc;
-      }, 0);
-    });
+        return newData.reduce((acc, element) => {
+          const newAcc = element.isIncome
+            ? acc + element.amount
+            : acc - element.amount;
+          return newAcc;
+        }, 0);
+      })
+      .catch((error) => console.log(error));
   }
 
   getExpense(id) {
