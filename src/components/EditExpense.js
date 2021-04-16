@@ -73,6 +73,16 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: "#007e33",
     },
   },
+  deleteButton: {
+    marginTop: "1vh",
+    width: "40vw",
+    height: "6vh",
+    color: "#ffffff",
+    backgroundColor: "#CE1B52",
+    "&:hover": {
+      backgroundColor: "#B91849",
+    },
+  },
   centerAll: {
     display: "flex",
     flexDirection: "column",
@@ -125,8 +135,18 @@ const EditExpense = ({ update, setUpdate }) => {
     history.push("/");
   };
 
+  const handleDelete = async () => {
+    try {
+      await expenseService.deleteExpense(expenseId);
+    } catch (error) {
+      console.log(error);
+    }
+    setUpdate(!update);
+    history.push("/");
+  };
+
   return (
-    <div>
+    <div className={classes.centerAll}>
       <form onSubmit={formSubmit} className={classes.centerAll}>
         <FormControl fullWidth className={classes.textArea} variant='outlined'>
           <InputLabel htmlFor='outlined-adornment-amount'>Amount</InputLabel>
@@ -179,9 +199,17 @@ const EditExpense = ({ update, setUpdate }) => {
           type='submit'
           className={classes.submitButton}
         >
-          Edit Activity
+          Edit
         </Button>
       </form>
+      <Button
+        variant='contained'
+        type='submit'
+        className={classes.deleteButton}
+        onClick={handleDelete}
+      >
+        Delete
+      </Button>
     </div>
   );
 };

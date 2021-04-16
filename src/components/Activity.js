@@ -123,31 +123,33 @@ const Activity = ({ update, setUpdate, activities }) => {
     <div>
       {activities.map((act) => {
         return (
-          <Card className={classes.root} key={act._id}>
-            <CardContent>
-              {act.category === "Salary" ? (
-                <Typography variant='h5'>{act.amount} € </Typography>
-              ) : (
-                <Typography variant='h5' className={classes.expense}>
-                  - {act.amount} €{" "}
+          <div key={act._id}>
+            <Card className={classes.root}>
+              <CardContent>
+                {act.category === "Salary" ? (
+                  <Typography variant='h5'>{act.amount} € </Typography>
+                ) : (
+                  <Typography variant='h5' className={classes.expense}>
+                    - {act.amount} €{" "}
+                  </Typography>
+                )}
+                <Typography className={categorySelector(act.category)}>
+                  {act.category}
                 </Typography>
-              )}
-              <Typography className={categorySelector(act.category)}>
-                {act.category}
-              </Typography>
-              <Typography variant='overline' display='block'>
-                <DayJS format='DD/MM/YYYY @ hh:mm'>{act.created_at}</DayJS>
-              </Typography>
-            </CardContent>
-            <CardActions className={classes.cardAction}>
-              <Link to={`/expense/${act._id}`}>
-                <Button size='small'>Edit</Button>
-              </Link>
-              <Button size='small' onClick={() => handleDelete(act._id)}>
-                Delete
-              </Button>
-            </CardActions>
-          </Card>
+                <Typography variant='overline' display='block'>
+                  <DayJS format='DD/MM/YYYY @ hh:mm'>{act.created_at}</DayJS>
+                </Typography>
+              </CardContent>
+              <CardActions className={classes.cardAction}>
+                <Link to={`/expense/${act._id}`}>
+                  <Button size='small'>Edit</Button>
+                </Link>
+                <Button size='small' onClick={() => handleDelete(act._id)}>
+                  Delete
+                </Button>
+              </CardActions>
+            </Card>
+          </div>
         );
       })}
       <Link to='/addexpense' className={classes.fabPosition}>

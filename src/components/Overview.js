@@ -4,6 +4,8 @@ import { VictoryPie } from "victory";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 
+import Selector from "./Selector";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     "& > *": {
@@ -20,15 +22,50 @@ const useStyles = makeStyles((theme) => ({
     color: "white",
     marginTop: "2vh",
     textAlign: "center",
+    width: "80vw",
+  },
+  bar: {
+    backgroundColor: "#0066DD",
+    color: "white",
+    marginTop: "2vh",
+    textAlign: "center",
+    width: "80vw",
+  },
+  restaurant: {
+    backgroundColor: "#01AC83",
+    color: "white",
+    marginTop: "2vh",
+    textAlign: "center",
+    width: "80vw",
+  },
+  grocery: {
+    backgroundColor: "#DF0086",
+    color: "white",
+    marginTop: "2vh",
+    textAlign: "center",
+    width: "80vw",
+  },
+  transport: {
+    backgroundColor: "#E7A600",
+    color: "white",
+    marginTop: "2vh",
+    textAlign: "center",
+    width: "80vw",
+  },
+  centerAll: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
 }));
 
 const Overview = ({ activities }) => {
-  const [bar, setBar] = useState(1);
-  const [restaurant, setRestaurant] = useState(1);
-  const [grocery, setGrocery] = useState(1);
-  const [transport, setTransport] = useState(1);
-  const [salary, setSalary] = useState(0);
+  const [values, setValues] = useState({
+    bar: 1,
+    restaurant: 2,
+    grocery: 3,
+    transport: 4,
+  });
   const [currentMonth, setCurrentMonth] = useState(3);
 
   const classes = useStyles();
@@ -38,34 +75,41 @@ const Overview = ({ activities }) => {
       return new Date(activity.created_at).getMonth() === currentMonth;
     });
 
+    let newBar, newRestaurant, newGrocery, newTransport, newSalary;
+    newBar = newRestaurant = newGrocery = newTransport = newSalary = 0;
+
     monthActivities.forEach((act) => {
-      switch (act.category) {
-        case "Bar/Cafeteria":
-          let newBar = bar + act.amount;
-          setBar(newBar);
-          break;
-        case "Restaurant":
-          setRestaurant(restaurant + act.amount);
-          break;
-        case "Grocery Store":
-          setGrocery(grocery + act.amount);
-          break;
-        case "Transport":
-          setTransport(transport + act.amount);
-          break;
-        case "Salary":
-          setSalary(salary + act.amount);
-        default:
-          break;
+      if (act.category === "Bar/Cafeteria") {
+        newBar += act.amount;
+      } else if (act.category === "Restaurant") {
+        newRestaurant += act.amount;
+      } else if (act.category === "Grocery Store") {
+        newGrocery += act.amount;
+      } else if (act.category === "Transport") {
+        newTransport += act.amount;
+      } else if (act.category === "Salary") {
+        newSalary += act.amount;
       }
     });
 
-    console.log("activities", activities);
-    console.log("monthActivities", monthActivities);
+    setValues({
+      bar: newBar,
+      restaurant: newRestaurant,
+      grocery: newGrocery,
+      transport: newTransport,
+      salary: newSalary,
+    });
   }, [currentMonth]);
 
   return (
-    <div>
+    <div className={classes.centerAll}>
+      <Selector activities={activities} setCurrentMonth={setCurrentMonth} />
+      <Typography variant='h5' className={classes.title}>
+        Current Month Income
+      </Typography>
+      <Typography variant='h5' className={classes.salary}>
+        Salary: {values.salary}
+      </Typography>
       <Typography variant='h5' className={classes.title}>
         Current Month Expenses
       </Typography>
@@ -74,17 +118,23 @@ const Overview = ({ activities }) => {
         animate={{ duration: 500 }}
         colorScale={["#0066DD", "#01AC83", "#DF0086", "#E7A600"]}
         data={[
-          { x: `Bar/Cafeteria: ${bar}`, y: bar },
-          { x: `Restaurant: ${restaurant}`, y: restaurant },
-          { x: `Grocery Store: ${grocery}`, y: grocery },
-          { x: `Transport: ${transport}`, y: transport },
+          { x: "Bar", y: values.bar },
+          { x: "Restaurant", y: values.restaurant },
+          { x: "Grocery Store", y: values.grocery },
+          { x: "Transport", y: values.transport },
         ]}
       />
-      <Typography variant='h5' className={classes.title}>
-        Current Month Income
+      <Typography variant='h5' className={classes.bar}>
+        Bar/Cafeteria: {values.bar}
       </Typography>
-      <Typography variant='h5' className={classes.salary}>
-        {salary}
+      <Typography variant='h5' className={classes.restaurant}>
+        Restaurant: {values.restaurant}
+      </Typography>
+      <Typography variant='h5' className={classes.grocery}>
+        Grocery Store: {values.grocery}
+      </Typography>
+      <Typography variant='h5' className={classes.transport}>
+        Transport: {values.transport}
       </Typography>
     </div>
   );
