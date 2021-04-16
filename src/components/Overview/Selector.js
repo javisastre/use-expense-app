@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
@@ -14,14 +14,33 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Selector({ setCurrentMonth }) {
+export default function Selector({ monthList, currentMonth, setCurrentMonth }) {
   const classes = useStyles();
 
-  const [selector, setSelector] = useState();
+  const [selector, setSelector] = useState("January");
 
   const handleChange = (event) => {
     const name = event.target.name;
     setSelector(event.target.name);
+  };
+
+  const monthConverter = (number) => {
+    const dictionary = {
+      0: "January",
+      1: "February",
+      2: "March",
+      3: "April",
+      4: "May",
+      5: "June",
+      6: "July",
+      7: "August",
+      8: "September",
+      9: "October",
+      10: "November",
+      11: "December",
+    };
+
+    return dictionary[number];
   };
 
   return (
@@ -29,9 +48,9 @@ export default function Selector({ setCurrentMonth }) {
       <FormControl className={classes.formControl}>
         <InputLabel htmlFor='age-native-simple'>Month</InputLabel>
         <Select native value={selector} onChange={handleChange}>
-          <option value={10}>Ten</option>
-          <option value={20}>Twenty</option>
-          <option value={30}>Thirty</option>
+          {monthList.map((mon) => {
+            return <option value={mon}>{monthConverter(mon)}</option>;
+          })}
         </Select>
       </FormControl>
     </div>

@@ -4,7 +4,7 @@ import { Switch, Route } from "react-router-dom";
 import AddExpense from "./components/AddExpense";
 import Activity from "./components/Activity";
 import EditExpense from "./components/EditExpense";
-import Overview from "./components/Overview";
+import Overview from "./components/Overview/Overview";
 import Timeline from "./components/Timeline";
 import NavBar from "./components/Navbar/NavBar";
 

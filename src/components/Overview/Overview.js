@@ -66,17 +66,33 @@ const Overview = ({ activities }) => {
     grocery: 3,
     transport: 4,
   });
-  const [currentMonth, setCurrentMonth] = useState(3);
+  const [currentMonth, setCurrentMonth] = useState(0);
+  const [monthList, setMonthList] = useState([]);
 
   const classes = useStyles();
 
   useEffect(() => {
+    const monthArr = [];
+    activities.forEach((activity) => {
+      let month = new Date(activity.created_at).getMonth();
+      if (!monthArr.includes(month)) {
+        monthArr.push(month);
+      }
+    });
+    setMonthList(monthArr.sort((a, b) => a - b));
+    setCurrentMonth(Math.max(...monthArr));
+
     const monthActivities = activities.filter((activity) => {
       return new Date(activity.created_at).getMonth() === currentMonth;
     });
 
-    let newBar, newRestaurant, newGrocery, newTransport, newSalary;
-    newBar = newRestaurant = newGrocery = newTransport = newSalary = 0;
+    let [newBar, newRestaurant, newGrocery, newTransport, newSalary] = [
+      0,
+      0,
+      0,
+      0,
+      0,
+    ];
 
     monthActivities.forEach((act) => {
       if (act.category === "Bar/Cafeteria") {
@@ -99,11 +115,15 @@ const Overview = ({ activities }) => {
       transport: newTransport,
       salary: newSalary,
     });
-  }, [currentMonth]);
+  }, [currentMonth, activities]);
 
   return (
     <div className={classes.centerAll}>
-      <Selector activities={activities} setCurrentMonth={setCurrentMonth} />
+      <Selector
+        monthList={monthList}
+        currentMonth={currentMonth}
+        setCurrentMonth={setCurrentMonth}
+      />
       <Typography variant='h5' className={classes.title}>
         Current Month Income
       </Typography>
