@@ -60,18 +60,34 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Overview = ({ activities }) => {
+  const [currentMonth, setCurrentMonth] = useState(0);
+  const [monthList, setMonthList] = useState([]);
+  const [displayActivities, setDisplayActivities] = useState([]);
   const [values, setValues] = useState({
     bar: 1,
     restaurant: 2,
     grocery: 3,
     transport: 4,
   });
-  const [currentMonth, setCurrentMonth] = useState(0);
-  const [monthList, setMonthList] = useState([]);
 
   const classes = useStyles();
 
   useEffect(() => {
+    getMonthList();
+
+    const current = Math.max(...monthList);
+    console.log("current", current);
+    setCurrentMonth(current);
+    getDisplayActivities();
+    calculateValues();
+  }, []);
+
+  useEffect(() => {
+    getDisplayActivities();
+    calculateValues();
+  }, [currentMonth]);
+
+  const getMonthList = () => {
     const monthArr = [];
     activities.forEach((activity) => {
       let month = new Date(activity.created_at).getMonth();
@@ -79,13 +95,21 @@ const Overview = ({ activities }) => {
         monthArr.push(month);
       }
     });
+
     setMonthList(monthArr.sort((a, b) => a - b));
-    setCurrentMonth(Math.max(...monthArr));
+  };
 
+  const getDisplayActivities = () => {
     const monthActivities = activities.filter((activity) => {
-      return new Date(activity.created_at).getMonth() === currentMonth;
+      const checkDate = new Date(activity.created_at).getMonth();
+      return new Date(activity.created_at).getMonth() === Number(currentMonth);
     });
+    console.log("currentMonth", currentMonth);
+    console.log("month activities", monthActivities);
+    setDisplayActivities(monthActivities);
+  };
 
+  const calculateValues = () => {
     let [newBar, newRestaurant, newGrocery, newTransport, newSalary] = [
       0,
       0,
@@ -94,7 +118,7 @@ const Overview = ({ activities }) => {
       0,
     ];
 
-    monthActivities.forEach((act) => {
+    displayActivities.forEach((act) => {
       if (act.category === "Bar/Cafeteria") {
         newBar += act.amount;
       } else if (act.category === "Restaurant") {
@@ -108,6 +132,19 @@ const Overview = ({ activities }) => {
       }
     });
 
+    console.log(
+      "bar",
+      newBar,
+      "restaurant",
+      newRestaurant,
+      "grocery",
+      newGrocery,
+      "transport",
+      newTransport,
+      "salary",
+      newSalary
+    );
+
     setValues({
       bar: newBar,
       restaurant: newRestaurant,
@@ -115,7 +152,7 @@ const Overview = ({ activities }) => {
       transport: newTransport,
       salary: newSalary,
     });
-  }, [currentMonth, activities]);
+  };
 
   return (
     <div className={classes.centerAll}>

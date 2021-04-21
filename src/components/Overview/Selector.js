@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
@@ -17,11 +17,8 @@ const useStyles = makeStyles((theme) => ({
 export default function Selector({ monthList, currentMonth, setCurrentMonth }) {
   const classes = useStyles();
 
-  const [selector, setSelector] = useState("January");
-
   const handleChange = (event) => {
-    const name = event.target.name;
-    setSelector(event.target.name);
+    setCurrentMonth(event.target.value);
   };
 
   const monthConverter = (number) => {
@@ -47,9 +44,13 @@ export default function Selector({ monthList, currentMonth, setCurrentMonth }) {
     <div>
       <FormControl className={classes.formControl}>
         <InputLabel htmlFor='age-native-simple'>Month</InputLabel>
-        <Select native value={selector} onChange={handleChange}>
+        <Select native value={currentMonth} onChange={handleChange}>
           {monthList.map((mon) => {
-            return <option value={mon}>{monthConverter(mon)}</option>;
+            return (
+              <option key={mon} value={mon}>
+                {monthConverter(mon)}
+              </option>
+            );
           })}
         </Select>
       </FormControl>
