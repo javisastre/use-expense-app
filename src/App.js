@@ -57,7 +57,7 @@ const App = () => {
           <Overview activities={activities} />
         </Route>
         <Route exact path='/timeline'>
-          <Overview activities={activities} />
+          <Timeline activities={activities} />
         </Route>
       </Switch>
     </div>

@@ -76,7 +76,6 @@ const Overview = ({ activities }) => {
     getMonthList();
 
     const current = Math.max(...monthList);
-    console.log("current", current);
     setCurrentMonth(current);
     getDisplayActivities();
     calculateValues();
