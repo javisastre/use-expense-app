@@ -99,7 +99,11 @@ const App = () => {
           />
         </Route>
         <Route exact path='/timeline'>
-          <Timeline activities={activities} monthList={monthList} />
+          <Timeline
+            activities={activities}
+            monthList={monthList}
+            monthConverter={monthConverter}
+          />
         </Route>
       </Switch>
     </div>

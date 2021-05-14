@@ -7,8 +7,15 @@ const Timeline = ({ activities, monthList, monthConverter }) => {
 
   useEffect(() => {
     const setValues = () => {
-      const inc = [];
-      const exp = [];
+      const reverseMonthList = monthList.sort((a, b) => a - b);
+      const inc = reverseMonthList.map((mo) => {
+        let obj = {
+          x: monthConverter(mo),
+          y: 0,
+        };
+        return obj;
+      });
+      const exp = [...inc];
 
       activities.map((element) => {});
 
