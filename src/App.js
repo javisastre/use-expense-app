@@ -14,6 +14,7 @@ const App = () => {
   const [balance, setBalance] = useState(0);
   const [activities, setActivities] = useState([]);
   const [update, setUpdate] = useState(false);
+  const [monthList, setMonthList] = useState([]);
 
   useEffect(() => {
     const getAllActivities = async () => {
@@ -39,6 +40,39 @@ const App = () => {
     getAllActivities();
   }, [update]);
 
+  useEffect(() => {
+    const getMonthList = () => {
+      const monthArr = [];
+      activities.forEach((activity) => {
+        let month = new Date(activity.created_at).getMonth();
+        if (!monthArr.includes(month)) {
+          monthArr.push(month);
+        }
+      });
+      setMonthList(monthArr);
+    };
+    getMonthList();
+  }, [activities]);
+
+  const monthConverter = (number) => {
+    const dictionary = {
+      0: "January",
+      1: "February",
+      2: "March",
+      3: "April",
+      4: "May",
+      5: "June",
+      6: "July",
+      7: "August",
+      8: "September",
+      9: "October",
+      10: "November",
+      11: "December",
+    };
+
+    return dictionary[number];
+  };
+
   return (
     <div className='App'>
       <NavBar parentBalance={balance} />
@@ -58,10 +92,14 @@ const App = () => {
           <EditExpense update={update} setUpdate={setUpdate} />
         </Route>
         <Route exact path='/overview'>
-          <Overview activities={activities} />
+          <Overview
+            activities={activities}
+            monthList={monthList}
+            monthConverter={monthConverter}
+          />
         </Route>
         <Route exact path='/timeline'>
-          <Timeline activities={activities} />
+          <Timeline activities={activities} monthList={monthList} />
         </Route>
       </Switch>
     </div>

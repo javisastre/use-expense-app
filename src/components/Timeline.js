@@ -1,7 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { VictoryChart, VictoryGroup, VictoryBar } from "victory";
 
-const Timeline = ({ activities }) => {
+const Timeline = ({ activities, monthList, monthConverter }) => {
+  const [incomeData, setIncomeData] = useState([]);
+  const [expenseData, setExpenseData] = useState([]);
+
+  useEffect(() => {
+    const setValues = () => {
+      const inc = [];
+      const exp = [];
+
+      activities.map((element) => {});
+
+      setIncomeData(inc);
+      setExpenseData(exp);
+    };
+    setValues();
+  }, []);
+
   return (
     <div>
       <VictoryChart domainPadding={50}>

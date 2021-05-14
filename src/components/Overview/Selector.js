@@ -14,30 +14,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Selector({ monthList, currentMonth, setCurrentMonth }) {
+export default function Selector({
+  monthList,
+  currentMonth,
+  setCurrentMonth,
+  monthConverter,
+}) {
   const classes = useStyles();
 
   const handleChange = (event) => {
     setCurrentMonth(event.target.value);
-  };
-
-  const monthConverter = (number) => {
-    const dictionary = {
-      0: "January",
-      1: "February",
-      2: "March",
-      3: "April",
-      4: "May",
-      5: "June",
-      6: "July",
-      7: "August",
-      8: "September",
-      9: "October",
-      10: "November",
-      11: "December",
-    };
-
-    return dictionary[number];
   };
 
   return (

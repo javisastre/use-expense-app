@@ -59,9 +59,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Overview = ({ activities }) => {
+const Overview = ({ activities, monthList, monthConverter }) => {
   const [currentMonth, setCurrentMonth] = useState(0);
-  const [monthList, setMonthList] = useState([]);
   const [displayActivities, setDisplayActivities] = useState([]);
   const [values, setValues] = useState({
     bar: 1,
@@ -73,24 +72,11 @@ const Overview = ({ activities }) => {
   const classes = useStyles();
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => getMonthList(), []);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => getDefaultMonth(), [monthList]);
+  useEffect(() => getDefaultMonth(), []);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => getDisplayActivities(), [currentMonth]);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => getValues(), [displayActivities]);
-
-  const getMonthList = () => {
-    const monthArr = [];
-    activities.forEach((activity) => {
-      let month = new Date(activity.created_at).getMonth();
-      if (!monthArr.includes(month)) {
-        monthArr.push(month);
-      }
-    });
-    setMonthList(monthArr);
-  };
 
   const getDefaultMonth = () => {
     const current = Math.max(...monthList);
@@ -106,11 +92,7 @@ const Overview = ({ activities }) => {
 
   const getValues = () => {
     let [newBar, newRestaurant, newGrocery, newTransport, newSalary] = [
-      0,
-      0,
-      0,
-      0,
-      0,
+      0, 0, 0, 0, 0,
     ];
 
     displayActivities.forEach((act) => {
@@ -142,6 +124,7 @@ const Overview = ({ activities }) => {
         monthList={monthList}
         currentMonth={currentMonth}
         setCurrentMonth={setCurrentMonth}
+        monthConverter={monthConverter}
       />
       <Typography variant='h5' className={classes.title}>
         Current Month Income
