@@ -72,16 +72,12 @@ const Overview = ({ activities }) => {
 
   const classes = useStyles();
 
-  useEffect(() => {
-    getMonthInfo();
-  }, []);
+  useEffect(() => getMonthList(), []);
+  useEffect(() => getDefaultMonth(), [monthList]);
+  useEffect(() => getDisplayActivities(), [currentMonth]);
+  useEffect(() => getValues(), [displayActivities]);
 
-  useEffect(() => {
-    getDisplayActivities();
-    getValues();
-  }, [currentMonth]);
-
-  const getMonthInfo = () => {
+  const getMonthList = () => {
     const monthArr = [];
     activities.forEach((activity) => {
       let month = new Date(activity.created_at).getMonth();
@@ -89,10 +85,12 @@ const Overview = ({ activities }) => {
         monthArr.push(month);
       }
     });
+    setMonthList(monthArr);
+  };
 
-    const current = Math.max(...monthArr);
+  const getDefaultMonth = () => {
+    const current = Math.max(...monthList);
     setCurrentMonth(current);
-    setMonthList(monthArr.sort((a, b) => a - b));
   };
 
   const getDisplayActivities = () => {
