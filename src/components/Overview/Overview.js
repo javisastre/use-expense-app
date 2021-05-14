@@ -73,20 +73,15 @@ const Overview = ({ activities }) => {
   const classes = useStyles();
 
   useEffect(() => {
-    getMonthList();
-
-    const current = Math.max(...monthList);
-    setCurrentMonth(current);
-    getDisplayActivities();
-    calculateValues();
+    getMonthInfo();
   }, []);
 
   useEffect(() => {
     getDisplayActivities();
-    calculateValues();
+    getValues();
   }, [currentMonth]);
 
-  const getMonthList = () => {
+  const getMonthInfo = () => {
     const monthArr = [];
     activities.forEach((activity) => {
       let month = new Date(activity.created_at).getMonth();
@@ -95,20 +90,19 @@ const Overview = ({ activities }) => {
       }
     });
 
+    const current = Math.max(...monthArr);
+    setCurrentMonth(current);
     setMonthList(monthArr.sort((a, b) => a - b));
   };
 
   const getDisplayActivities = () => {
     const monthActivities = activities.filter((activity) => {
-      const checkDate = new Date(activity.created_at).getMonth();
       return new Date(activity.created_at).getMonth() === Number(currentMonth);
     });
-    console.log("currentMonth", currentMonth);
-    console.log("month activities", monthActivities);
     setDisplayActivities(monthActivities);
   };
 
-  const calculateValues = () => {
+  const getValues = () => {
     let [newBar, newRestaurant, newGrocery, newTransport, newSalary] = [
       0,
       0,
@@ -130,19 +124,6 @@ const Overview = ({ activities }) => {
         newSalary += act.amount;
       }
     });
-
-    console.log(
-      "bar",
-      newBar,
-      "restaurant",
-      newRestaurant,
-      "grocery",
-      newGrocery,
-      "transport",
-      newTransport,
-      "salary",
-      newSalary
-    );
 
     setValues({
       bar: newBar,

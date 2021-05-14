@@ -19,6 +19,10 @@ const App = () => {
     const getAllActivities = async () => {
       try {
         const allActivities = await expenseService.getAllExpenses();
+
+        allActivities.sort(
+          (a, b) => new Date(b.created_at) - new Date(a.created_at)
+        );
         setActivities(allActivities);
 
         const newBalance = allActivities.reduce((acc, element) => {
