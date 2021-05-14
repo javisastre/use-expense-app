@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { VictoryChart, VictoryGroup, VictoryBar } from "victory";
 
 const Timeline = ({ activities }) => {

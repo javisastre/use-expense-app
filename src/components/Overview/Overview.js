@@ -72,9 +72,13 @@ const Overview = ({ activities }) => {
 
   const classes = useStyles();
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => getMonthList(), []);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => getDefaultMonth(), [monthList]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => getDisplayActivities(), [currentMonth]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => getValues(), [displayActivities]);
 
   const getMonthList = () => {
