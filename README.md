@@ -13,5 +13,6 @@ Developed using:
 Components:
 
 - Activity: all the expenses added (amount, category and time & date). Edit or remove any of them.
-- AddExpense: add a new expense (amount and category)
-- Overview: montlhy overview.
+- AddExpense: add a new expense (amount and category).
+- Overview: montlhy overview with graphical pie chart that dynamically changes every month.
+- Timeline: overall view of expenses and incomes in the app.
