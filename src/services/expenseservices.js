@@ -3,7 +3,7 @@ import axios from "axios";
 class ExpenseService {
   constructor() {
     this.expense = axios.create({
-      baseURL: "https://useexpense-api.herokuapp.com/api", //"http://localhost:5000/api",
+      baseURL: "http://localhost:5000/api", //"https://useexpense-api.herokuapp.com/api",
       withCredentials: true,
     });
   }
